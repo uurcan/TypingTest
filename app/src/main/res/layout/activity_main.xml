@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/typewriter_background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <Button
+        android:id="@+id/btnStartGame"
+        android:background="@drawable/button_background"
+        android:textColor="#FFF"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:text="@string/start_game" />
+
+    <Button
+        android:visibility="gone"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"
+        android:id="@+id/btnSingleWord"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selection_button_background"
+        android:text="@string/single_word"
+        android:textColor="#FFF"/>
+
+    <Button
+        android:visibility="gone"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"
+        android:id="@+id/btnParagraph"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selection_button_background"
+        android:text="@string/paragraph"
+        android:textColor="#FFF"/>
+</LinearLayout>
