@@ -1,4 +1,4 @@
-package com.example.typingtest;
+package com.example.typingtest.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
+
+import com.example.typingtest.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private Button btnStartGame,btnSingleWord,btnParagraph;

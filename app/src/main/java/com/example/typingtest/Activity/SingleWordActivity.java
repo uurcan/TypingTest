@@ -1,4 +1,4 @@
-package com.example.typingtest;
+package com.example.typingtest.Activity;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
