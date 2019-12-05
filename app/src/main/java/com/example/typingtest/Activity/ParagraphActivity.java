@@ -111,5 +111,6 @@ public class ParagraphActivity extends AppCompatActivity {
     private void undoColorChange(TextView paragraphTextView, int currentIndex, int lookaheadIndex) {
         Spannable wordToSpan = new SpannableString(paragraphTextView.getText());
         wordToSpan.setSpan(new ForegroundColorSpan(Color.rgb(139,34,34)),currentIndex,lookaheadIndex,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        paragraphTextView.setText(wordToSpan);
     }
 }
