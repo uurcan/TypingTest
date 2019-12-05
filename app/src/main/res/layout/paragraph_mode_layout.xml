@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:background="@drawable/writer_activity_background"
     android:gravity="center"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
@@ -21,6 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <TextView
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:id="@+id/txtParagraph"
         android:textStyle="bold"
         android:text="@string/sample_text"
@@ -28,14 +31,8 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <TextView
-        android:id="@+id/txtResult"
-        android:visibility="gone"
-        android:textAlignment="center"
-        android:text="@string/paragraph"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
     <EditText
+        android:textAlignment="center"
         android:layout_marginTop="30dp"
         android:id="@+id/edtTextWriter"
         android:layout_width="match_parent"

@@ -2,6 +2,7 @@ package com.example.typingtest.Activity;
 
 import android.annotation.SuppressLint;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -19,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.typingtest.ParagraphInitializer;
 import com.example.typingtest.R;
+import com.shreyaspatil.MaterialDialog.BottomSheetMaterialDialog;
+import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,12 +29,12 @@ import java.util.ArrayList;
 public class ParagraphActivity extends AppCompatActivity {
     private ParagraphInitializer paragraphInitializer;
     private ArrayList<String> wordList;
-    private TextView paragraphTextView,resultTextView,timerView;
+    private TextView paragraphTextView,timerView;
     private Boolean inputClean;
     private EditText edtInput;
     public CountDownTimer countDownTimer;
     private ProgressBar progressBar;
-    private int wordIndex,numberOfWords;
+    private int wordIndex,numberOfWords,numberOfLetters;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +56,7 @@ public class ParagraphActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.toString().replace(" ","").equals(wordList.get(wordIndex))){
                     inputClean = true;
+                    numberOfLetters += s.length();
                     wordIndex++;
                     progressBar.setProgress((int)(100 * (float)wordIndex/numberOfWords));
                 }
@@ -85,29 +89,63 @@ public class ParagraphActivity extends AppCompatActivity {
             @Override
             public void onTick(long millisUntilFinished) {
                 timerView.setText("00:" + millisUntilFinished / 1000);
+                if ((millisUntilFinished/1000) < 10)
+                    timerView.setTextColor(Color.rgb(139,34,34));
             }
 
             @Override
             public void onFinish() {
                 timerView.setText(getString(R.string.zero));
                 edtInput.setEnabled(false);
-                StringBuilder builder = new StringBuilder("Your Score").append(wordIndex).append("wpm");
-                resultTextView.setText(builder);
+                initializeResultDialog();
             }
         }.start();
     }
+
+    private void initializeResultDialog() {
+        this.setTheme(R.style.MaterialTheme);
+        String speedText = getString(R.string.typing_speed) + " " + numberOfLetters / 5 + " WPM";
+        SpannableString spannableString = new SpannableString(speedText);
+        spannableString.setSpan(Color.RED,0,speedText.length(),0);
+        //todo: spannable color change is disabled
+        final BottomSheetMaterialDialog builder = new BottomSheetMaterialDialog.Builder(this)
+                .setTitle("Time").setCancelable(false)
+                .setMessage(getString(R.string.correct_letter) + " " + numberOfLetters + "\n" +
+                                    getString(R.string.correct_word) + " " + wordIndex + "\n" +
+                                    spannableString)
+                .setPositiveButton("Try Again",R.drawable.try_again,new BottomSheetMaterialDialog.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        dialogInterface.dismiss();
+                        edtInput.setText("");
+                        recreate();
+                    }
+                })
+                .setNegativeButton("Main Menu",R.drawable.main_menu,new BottomSheetMaterialDialog.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        dialogInterface.dismiss();
+                        setTheme(R.style.AppTheme);
+                        finishAffinity();
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    }
+                }).build();
+            builder.show();
+         }
+
     private void initializeComponents() {
         paragraphTextView = findViewById(R.id.txtParagraph);
-        resultTextView = findViewById(R.id.txtResult);
         edtInput = findViewById(R.id.edtTextWriter);
         timerView = findViewById(R.id.txtTimer);
         progressBar = findViewById(R.id.typingProgress);
     }
+
     private void updateColor(TextView paragraphTextView, int nextIndex) {
         Spannable wordToSpan = new SpannableString(paragraphTextView.getText());
         wordToSpan.setSpan(new ForegroundColorSpan(Color.rgb(34,139,34)),0,nextIndex,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         paragraphTextView.setText(wordToSpan);
     }
+
     private void undoColorChange(TextView paragraphTextView, int currentIndex, int lookaheadIndex) {
         Spannable wordToSpan = new SpannableString(paragraphTextView.getText());
         wordToSpan.setSpan(new ForegroundColorSpan(Color.rgb(139,34,34)),currentIndex,lookaheadIndex,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

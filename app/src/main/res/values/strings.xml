@@ -19,4 +19,7 @@
         Cras nunc quam, mattis at metus vitae, placerat pretium sapien.
         Suspendisse pretium augue sed facilisis tincidunt.</string>
     <string name="zero">00:00</string>
+    <string name="correct_letter">Correct Letter Count :</string>
+    <string name="correct_word">Correct Word Count:</string>
+    <string name="typing_speed">Typing Speed:</string>
 </resources>
