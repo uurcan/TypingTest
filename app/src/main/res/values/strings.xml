@@ -4,6 +4,19 @@
     <string name="single_word">SINGLE WORD</string>
     <string name="paragraph">PARAGRAPH</string>
     <string name="time_left">Time Left</string>
-    <string name="sample_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel ligula eget magna porttitor ultricies. Integer aliquam quis purus vitae imperdiet. Proin a sodales neque. Donec consectetur ex pulvinar nulla dictum feugiat. Proin molestie tellus sit amet diam imperdiet molestie nec vel risus. Nunc feugiat sem id venenatis rhoncus. Fusce et feugiat eros. Curabitur sollicitudin eleifend lorem, id maximus lacus maximus ac. Pellentesque vehicula sem ac sagittis pharetra. Nam lacinia consequat risus, eget tincidunt urna tincidunt sit amet. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer molestie ac ex in sagittis. Cras nunc quam, mattis at metus vitae, placerat pretium sapien. Suspendisse pretium augue sed facilisis tincidunt.</string>
+    <string name="sample_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Nullam vel ligula eget magna porttitor ultricies.
+        Integer aliquam quis purus vitae imperdiet.
+        Proin a sodales neque.
+        Donec consectetur ex pulvinar nulla dictum feugiat.
+        Proin molestie tellus sit amet diam imperdiet molestie nec vel risus.
+        Nunc feugiat sem id venenatis rhoncus.
+        Fusce et feugiat eros. Curabitur sollicitudin eleifend lorem, id maximus lacus maximus ac.
+        Pellentesque vehicula sem ac sagittis pharetra.
+        Nam lacinia consequat risus, eget tincidunt urna tincidunt sit amet.
+        Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+        Integer molestie ac ex in sagittis.
+        Cras nunc quam, mattis at metus vitae, placerat pretium sapien.
+        Suspendisse pretium augue sed facilisis tincidunt.</string>
     <string name="zero">00:00</string>
 </resources>

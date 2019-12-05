@@ -12,9 +12,8 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class ParagraphInitializer {
-    private Context context;
     private ArrayList<String> wordList;
-    public int totalLineCount;
+    private int totalLineCount;
     private int currentIndex;
     private String paragraph;
     private AssetManager assetManager;
@@ -23,7 +22,6 @@ public class ParagraphInitializer {
     private InputStream inputStream;
 
     public ParagraphInitializer(Context context) throws IOException {
-        this.context = context;
         totalLineCount = currentIndex = 0;
         paragraph = "Default Paragraph";
         assetManager = context.getAssets();
