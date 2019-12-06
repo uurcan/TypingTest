@@ -18,7 +18,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.typingtest.ParagraphInitializer;
+import com.example.typingtest.Utils.ParagraphInitializer;
 import com.example.typingtest.R;
 import com.shreyaspatil.MaterialDialog.BottomSheetMaterialDialog;
 import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
@@ -26,7 +26,7 @@ import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ParagraphActivity extends AppCompatActivity {
+public class ParagraphActivity extends AppCompatActivity implements TextWatcher {
     private ParagraphInitializer paragraphInitializer;
     private ArrayList<String> wordList;
     private TextView paragraphTextView,timerView;
@@ -46,35 +46,33 @@ public class ParagraphActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        edtInput.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                //empty method
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().replace(" ","").equals(wordList.get(wordIndex))){
-                    inputClean = true;
-                    numberOfLetters += s.length();
-                    wordIndex++;
-                    progressBar.setProgress((int)(100 * (float)wordIndex/numberOfWords));
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (inputClean){
-                    inputClean = false;
-                    edtInput.setText("");
-                    updateColor(paragraphTextView,paragraphInitializer.getNextIndex(wordIndex-1));
-                }else if(!wordList.get(wordIndex).contains(s.toString().replace(" ",""))){
-                    undoColorChange(paragraphTextView,paragraphInitializer.getCurrentIndex(),paragraphInitializer.lookaheadIndex(wordIndex));
-                }
-            }
-        });
+        edtInput.addTextChangedListener(this);
+    }
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        //empty method
     }
 
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        if (s.toString().replace(" ","").equals(wordList.get(wordIndex))){
+            inputClean = true;
+            numberOfLetters += s.length();
+            wordIndex++;
+            progressBar.setProgress((int)(100 * (float)wordIndex/numberOfWords));
+        }
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        if (inputClean){
+            inputClean = false;
+            edtInput.setText("");
+            updateColor(paragraphTextView,paragraphInitializer.getNextIndex(wordIndex-1));
+        }else if(!wordList.get(wordIndex).contains(s.toString().replace(" ",""))){
+            undoColorChange(paragraphTextView,paragraphInitializer.getCurrentIndex(),paragraphInitializer.lookaheadIndex(wordIndex));
+        }
+    }
     protected void refreshParagraph() throws IOException {
         paragraphInitializer = new ParagraphInitializer(this);
         String paragraph = paragraphInitializer.getRandomParagraph();

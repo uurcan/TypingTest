@@ -1,4 +1,4 @@
-package com.example.typingtest;
+package com.example.typingtest.Utils;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -13,8 +13,7 @@ import java.util.Random;
 
 public class ParagraphInitializer {
     private ArrayList<String> wordList;
-    private int totalLineCount;
-    private int currentIndex;
+    private int totalLineCount,currentIndex;
     private String paragraph;
     private AssetManager assetManager;
     private Random random;
