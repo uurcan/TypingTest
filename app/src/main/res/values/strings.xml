@@ -22,4 +22,6 @@
     <string name="correct_letter">Correct Letter Count :</string>
     <string name="correct_word">Correct Word Count:</string>
     <string name="typing_speed">Typing Speed:</string>
+    <string name="nickname">Nickname</string>
+    <string name="OK">OK</string>
 </resources>

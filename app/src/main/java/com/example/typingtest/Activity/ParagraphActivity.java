@@ -2,6 +2,7 @@ package com.example.typingtest.Activity;
 
 import android.annotation.SuppressLint;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,8 +19,12 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.typingtest.Constants;
+import com.example.typingtest.User;
 import com.example.typingtest.Utils.ParagraphInitializer;
 import com.example.typingtest.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.shreyaspatil.MaterialDialog.BottomSheetMaterialDialog;
 import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 
@@ -35,7 +40,7 @@ public class ParagraphActivity extends AppCompatActivity implements TextWatcher 
     public CountDownTimer countDownTimer;
     private ProgressBar progressBar;
     private int wordIndex,numberOfWords,numberOfLetters;
-
+    private DatabaseReference databaseReference;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +51,7 @@ public class ParagraphActivity extends AppCompatActivity implements TextWatcher 
         } catch (IOException e) {
             e.printStackTrace();
         }
+        databaseReference = FirebaseDatabase.getInstance().getReference(Constants.USER_SCORE);
         edtInput.addTextChangedListener(this);
     }
     @Override
@@ -115,6 +121,7 @@ public class ParagraphActivity extends AppCompatActivity implements TextWatcher 
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
                         dialogInterface.dismiss();
+                        pushFirebaseValues();
                         edtInput.setText("");
                         recreate();
                     }
@@ -123,6 +130,7 @@ public class ParagraphActivity extends AppCompatActivity implements TextWatcher 
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
                         dialogInterface.dismiss();
+                        pushFirebaseValues();
                         setTheme(R.style.AppTheme);
                         finishAffinity();
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -148,5 +156,12 @@ public class ParagraphActivity extends AppCompatActivity implements TextWatcher 
         Spannable wordToSpan = new SpannableString(paragraphTextView.getText());
         wordToSpan.setSpan(new ForegroundColorSpan(Color.rgb(139,34,34)),currentIndex,lookaheadIndex,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         paragraphTextView.setText(wordToSpan);
+    }
+    private void pushFirebaseValues(){
+        String id = databaseReference.push().getKey();
+        User user = new User(id,getSharedPreferences(Constants.USER_PREFERENCE, Context.MODE_PRIVATE)
+                .getString(Constants.USER_NICK,getString(R.string.OK)),(numberOfLetters/5),numberOfLetters);
+        if (id != null)
+            databaseReference.child(id).setValue(user);
     }
 }
