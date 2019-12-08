@@ -19,8 +19,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.typingtest.Constants;
-import com.example.typingtest.User;
+import com.example.typingtest.Utils.Constants;
+import com.example.typingtest.Model.User;
 import com.example.typingtest.Utils.ParagraphInitializer;
 import com.example.typingtest.R;
 import com.google.firebase.database.DatabaseReference;

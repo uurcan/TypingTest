@@ -1,11 +1,11 @@
-package com.example.typingtest;
+package com.example.typingtest.Model;
 
 public class User {
     private String userId;
     private String userName;
     private int userScore;
     private int highestScore;
-
+    public User(){}
     public User(String userId, String userName, int userScore,int highestScore) {
         this.userId = userId;
         this.userName = userName;

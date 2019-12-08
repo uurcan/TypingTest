@@ -24,4 +24,7 @@
     <string name="typing_speed">Typing Speed:</string>
     <string name="nickname">Nickname</string>
     <string name="OK">OK</string>
+    <string name="player">PLAYER :</string>
+    <string name="score">SCORE:</string>
+    <string name="high_score">HIGH SCORE</string>
 </resources>

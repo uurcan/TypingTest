@@ -14,12 +14,12 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.typingtest.Constants;
+import com.example.typingtest.Utils.Constants;
 import com.example.typingtest.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    private Button btnStartGame,btnSingleWord,btnParagraph;
-    final String prefName = "isFirst";
+    private Button btnStartGame,btnSingleWord,btnParagraph,btnHighScore;
+    final String prefName = Constants.IS_FIRST_LOGIN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,20 +65,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnStartGame:
                 startSelection();
                 break;
+            case R.id.btnHighScore:
+                startHighScore();
+                break;
         }
     }
+
     private void initializeComponents(){
         btnStartGame = findViewById(R.id.btnStartGame);
         btnParagraph = findViewById(R.id.btnParagraph);
         btnSingleWord = findViewById(R.id.btnSingleWord);
+        btnHighScore = findViewById(R.id.btnHighScore);
         btnParagraph.setVisibility(View.GONE);
         btnSingleWord.setVisibility(View.GONE);
+        btnHighScore.setOnClickListener(this);
         btnStartGame.setOnClickListener(this);
         btnSingleWord.setOnClickListener(this);
         btnParagraph.setOnClickListener(this);
     }
     private void startSelection(){
         btnStartGame.setVisibility(View.GONE);
+        btnHighScore.setVisibility(View.GONE);
         btnSingleWord.setVisibility(View.VISIBLE);
         btnParagraph.setVisibility(View.VISIBLE);
         Animation animation = new AlphaAnimation(0, 1);
@@ -87,13 +94,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnParagraph.setAnimation(animation);
     }
     private void startSingleWord(){
-        Intent intent = new Intent(this,SingleWordActivity.class);
-        intent.putExtra("GAME_MODE","SINGLE_WORD_MODE");
-        startActivity(intent);
+        startActivity(new Intent(this,SingleWordActivity.class));
     }
     private void startParagraph(){
-        Intent intent = new Intent(this,ParagraphActivity.class);
-        intent.putExtra("GAME_MODE","PARAGRAPH_MODE");
-        startActivity(intent);
+        startActivity(new Intent(this,ParagraphActivity.class));
+    }
+    private void startHighScore() {
+        startActivity(new Intent(this,HighScoreActivity.class));
     }
 }
