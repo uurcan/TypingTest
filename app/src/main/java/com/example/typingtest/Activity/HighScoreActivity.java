@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class HighScoreActivity extends AppCompatActivity {
@@ -43,6 +44,7 @@ public class HighScoreActivity extends AppCompatActivity {
                         User user = snapshot.getValue(User.class);
                         userData.add(user);
                     }
+                    Collections.sort(userData,User.sortByScore);
                     highScoreAdapter = new HighScoreAdapter(getApplicationContext(),userData);
                     recyclerView.setAdapter(highScoreAdapter);
                 }

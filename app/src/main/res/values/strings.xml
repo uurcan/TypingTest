@@ -22,9 +22,11 @@
     <string name="correct_letter">Correct Letter Count :</string>
     <string name="correct_word">Correct Word Count:</string>
     <string name="typing_speed">Typing Speed:</string>
-    <string name="nickname">Nickname</string>
+    <string name="nickname">Nickname: </string>
     <string name="OK">OK</string>
-    <string name="player">PLAYER :</string>
-    <string name="score">SCORE:</string>
+    <string name="player">Player :</string>
+    <string name="score">SCORE :</string>
     <string name="high_score">HIGH SCORE</string>
+    <string name="WPM">WPM</string>
+    <string name="correct_letter_count">Correct letter count : </string>
 </resources>

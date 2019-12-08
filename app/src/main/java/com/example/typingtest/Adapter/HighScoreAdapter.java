@@ -1,6 +1,7 @@
 package com.example.typingtest.Adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,12 +34,25 @@ public class HighScoreAdapter extends RecyclerView.Adapter<HighScoreAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull HighScoreAdapter.ViewHolder holder, int position) {
-        holder.textViewUserNick.setText(userList.get(position).getUserName());
-        holder.textViewUserScore.setText(String.valueOf(userList.get(position).getUserScore()));
-        if (position == 0){
-            holder.imgUserScore.setImageResource(R.drawable.main_menu);
-        }else {
-            holder.imgUserScore.setImageResource(R.drawable.try_again);
+        String userNickText = context.getString(R.string.nickname)+ " " + userList.get(position).getUserName();
+        String userLetterText = context.getString(R.string.correct_letter_count)+ " " + userList.get(position).getUserLetterCount();
+        String userWPMText = context.getString(R.string.typing_speed)+ " " + userList.get(position).getUserScore() + " WPM";
+        holder.textViewUserNick.setText(userNickText);
+        holder.textViewUserScore.setText(userLetterText);
+        holder.textViewUserLetter.setText(userWPMText);
+        switch (position){
+            case 0:
+                holder.imgUserScore.setImageResource(R.drawable.gold_medal);
+                break;
+            case 1:
+                holder.imgUserScore.setImageResource(R.drawable.silver_medal);
+                break;
+            case 2:
+                holder.imgUserScore.setImageResource(R.drawable.bronze_medal);
+                break;
+                default:
+                    holder.imgUserScore.setImageResource(R.drawable.star);
+                    break;
         }
     }
 
@@ -48,10 +62,11 @@ public class HighScoreAdapter extends RecyclerView.Adapter<HighScoreAdapter.View
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView textViewUserNick,textViewUserScore;
+        private TextView textViewUserNick,textViewUserScore,textViewUserLetter;
         private ImageView imgUserScore;
         ViewHolder(@NonNull View itemView) {
             super(itemView);
+            textViewUserLetter = itemView.findViewById(R.id.txtCorrectLetterCount);
             textViewUserNick = itemView.findViewById(R.id.txtHighScoreNick);
             textViewUserScore = itemView.findViewById(R.id.txtHighScoreScore);
             imgUserScore = itemView.findViewById(R.id.imgHighScoreImg);

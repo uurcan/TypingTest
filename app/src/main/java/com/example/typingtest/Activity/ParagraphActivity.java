@@ -160,7 +160,7 @@ public class ParagraphActivity extends AppCompatActivity implements TextWatcher 
     private void pushFirebaseValues(){
         String id = databaseReference.push().getKey();
         User user = new User(id,getSharedPreferences(Constants.USER_PREFERENCE, Context.MODE_PRIVATE)
-                .getString(Constants.USER_NICK,getString(R.string.OK)),(numberOfLetters/5),numberOfLetters);
+                .getString(Constants.USER_NICK,getString(R.string.OK)),(numberOfLetters/5),0,numberOfLetters);
         if (id != null)
             databaseReference.child(id).setValue(user);
     }
