@@ -14,13 +14,13 @@
         <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".Activity.ParagraphActivity"
                   android:windowSoftInputMode="stateVisible"/>
-        <activity android:name=".Activity.SingleWordActivity"/>
+        <activity android:name=".Activity.SingleWordActivity"
+            android:windowSoftInputMode="stateVisible"/>
         <activity android:name=".Activity.HighScoreActivity"/>
     </application>
 

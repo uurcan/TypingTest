@@ -1,15 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/writer_activity_background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <TextView
-        android:visibility="visible"
-        android:textColor="#ff0000"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:textAlignment="center"
-        android:text="BURAYI HENÜZ YAZMADIM"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="@string/zero"
+        android:id="@+id/textRemainingTime"
         android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:textSize="22sp"
+        android:textStyle="bold"
         android:layout_height="wrap_content"/>
+    <TextView
+        android:text="@string/correct_letter_count"
+        android:id="@+id/textCurrentCount"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/textRandomWords"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/correct_word"
+        android:textAlignment="center"
+        android:textColor="#ff0000"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textCurrentCount"
+        tools:layout_editor_absoluteX="10dp" />
+
+    <EditText
+        android:id="@+id/edtUserInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:inputType="textNoSuggestions"
+        android:textAlignment="center"
+        tools:layout_editor_absoluteX="10dp" />
 </LinearLayout>
