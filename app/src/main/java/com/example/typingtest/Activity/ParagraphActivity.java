@@ -46,12 +46,12 @@ public class ParagraphActivity extends AppCompatActivity implements TextWatcher 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paragraph);
         initializeComponents();
-        setTitle(getString(R.string.paragraph_title));
         try {
             refreshParagraph();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        setTitle(getString(R.string.paragraph_title));
         databaseReference = FirebaseDatabase.getInstance().getReference(Constants.USER_SCORE);
         edtInput.addTextChangedListener(this);
     }
@@ -112,7 +112,6 @@ public class ParagraphActivity extends AppCompatActivity implements TextWatcher 
         String speedText = getString(R.string.typing_speed) + " " + numberOfLetters / 5 + " WPM";
         SpannableString spannableString = new SpannableString(speedText);
         spannableString.setSpan(Color.RED,0,speedText.length(),0);
-        //todo: spannable color change is disabled
         final BottomSheetMaterialDialog builder = new BottomSheetMaterialDialog.Builder(this)
                 .setTitle("Time").setCancelable(false)
                 .setMessage(getString(R.string.correct_letter) + " " + numberOfLetters + "\n" +

@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">TypingTest</string>
+    <string name="app_name">Typing Test</string>
     <string name="start_game">Start</string>
     <string name="single_word">SINGLE WORD</string>
     <string name="single_word_title">Single Word</string>
     <string name="paragraph">PARAGRAPH</string>
-    <string name="paragraph_title">PARAGRAPH</string>
+    <string name="paragraph_title">Paragraph</string>
     <string name="time_left">Time Left</string>
     <string name="sample_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         Nullam vel ligula eget magna porttitor ultricies.

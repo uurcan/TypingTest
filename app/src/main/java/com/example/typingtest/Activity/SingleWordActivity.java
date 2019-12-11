@@ -112,7 +112,6 @@ public class SingleWordActivity extends AppCompatActivity {
         String speedText = getString(R.string.typing_speed) + " " + numberOfLetters / 5 + " WPM";
         SpannableString spannableString = new SpannableString(speedText);
         spannableString.setSpan(Color.RED,0,speedText.length(),0);
-        //todo: spannable color change is disabled
         final BottomSheetMaterialDialog builder = new BottomSheetMaterialDialog.Builder(this)
                 .setTitle("Time").setCancelable(false)
                 .setMessage(getString(R.string.correct_letter) + " " + numberOfLetters + "\n" +

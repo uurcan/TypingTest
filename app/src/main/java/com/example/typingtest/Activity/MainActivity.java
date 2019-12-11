@@ -8,9 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.SpannableString;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -63,8 +61,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         btnHSingleWord.setVisibility(View.GONE);
         btnHParagraph.setVisibility(View.GONE);
+        btnSingleWord.setVisibility(View.GONE);
+        btnParagraph.setVisibility(View.GONE);
+        btnStartGame.setVisibility(View.VISIBLE);
         btnHighScore.setVisibility(View.VISIBLE);
-        btnParagraph.setVisibility(View.VISIBLE);
         Animation animation = new AlphaAnimation(0, 1);
         animation.setDuration(1500);
         btnHighScore.setAnimation(animation);
@@ -73,11 +73,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
     private void initializeCurrentUserData(){
-        String userText = getString(R.string.current_user) + " " ;
-        String currentUser = getSharedPreferences(Constants.USER_PREFERENCE,Context.MODE_PRIVATE).
+        String currentUserText = getString(R.string.current_user) + " " +
+                getSharedPreferences(Constants.USER_PREFERENCE,Context.MODE_PRIVATE).
                 getString(Constants.USER_NICK,getString(R.string.OK));
-
-        String currentUserText = userText + currentUser;
         TextView textCurrentUser = findViewById(R.id.textCurrentUser);
         textCurrentUser.setText(currentUserText);
     }
@@ -117,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         SharedPreferences.Editor editor = getSharedPreferences(Constants.USER_PREFERENCE,Context.MODE_PRIVATE).edit();
                         editor.putString(Constants.USER_NICK,input.getText().toString());
                         editor.apply();
+                        recreate();
                     }
                 }).create();
         builder.show();
@@ -164,7 +163,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         intent.putExtra(Constants.GAME_TYPE,Constants.SINGLE_WORD);
         startActivity(intent);
     }
-
     private void startHighScoreParagraph() {
         Intent intent = new Intent(this,HighScoreActivity.class);
         intent.putExtra(Constants.GAME_TYPE,Constants.PARAGRAPH);
