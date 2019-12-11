@@ -8,13 +8,15 @@ public class User {
     private int userScore;
     private int highestScore;
     private int userLetterCount;
+    private boolean singleWord;
     public User(){}
-    public User(String userId, String userName, int userScore,int highestScore,int userLetterCount) {
+    public User(String userId, String userName, int userScore,int highestScore,int userLetterCount,boolean singleWord) {
         this.userId = userId;
         this.userName = userName;
         this.userScore = userScore;
         this.highestScore = highestScore;
         this.userLetterCount = userLetterCount;
+        this.singleWord = singleWord;
     }
 
     public String getUserName() {
@@ -31,6 +33,11 @@ public class User {
     public int getUserLetterCount(){
         return userLetterCount;
     }
+
+    public boolean isSingleWord() {
+        return singleWord;
+    }
+
     public static final Comparator<User> sortByScore = new Comparator<User>() {
         @Override
         public int compare(User o1, User o2) {

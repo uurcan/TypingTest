@@ -17,8 +17,9 @@ import android.widget.EditText;
 import com.example.typingtest.Utils.Constants;
 import com.example.typingtest.R;
 
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    private Button btnStartGame,btnSingleWord,btnParagraph,btnHighScore;
+    private Button btnStartGame,btnSingleWord,btnParagraph,btnHighScore,btnHParagraph,btnHSingleWord;
     final String prefName = Constants.IS_FIRST_LOGIN;
 
     @Override
@@ -66,9 +67,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startSelection();
                 break;
             case R.id.btnHighScore:
-                startHighScore();
+                startHighScoreSelection();
+                break;
+            case R.id.btnHighScoreParagraph:
+                startHighScoreParagraph();
+                break;
+            case R.id.btnHighScoreSingleWord:
+                startHighScoreSingleWord();
                 break;
         }
+    }
+
+    private void startHighScoreSingleWord() {
+        Intent intent = new Intent(this,HighScoreActivity.class);
+        intent.putExtra(Constants.GAME_TYPE,Constants.SINGLE_WORD);
+        startActivity(intent);
+    }
+
+    private void startHighScoreParagraph() {
+        Intent intent = new Intent(this,HighScoreActivity.class);
+        intent.putExtra(Constants.GAME_TYPE,Constants.PARAGRAPH);
+        startActivity(intent);
     }
 
     private void initializeComponents(){
@@ -76,12 +95,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnParagraph = findViewById(R.id.btnParagraph);
         btnSingleWord = findViewById(R.id.btnSingleWord);
         btnHighScore = findViewById(R.id.btnHighScore);
+        btnHParagraph = findViewById(R.id.btnHighScoreParagraph);
+        btnHSingleWord = findViewById(R.id.btnHighScoreSingleWord);
         btnParagraph.setVisibility(View.GONE);
         btnSingleWord.setVisibility(View.GONE);
+        btnHParagraph.setVisibility(View.GONE);
+        btnHSingleWord.setVisibility(View.GONE);
         btnHighScore.setOnClickListener(this);
         btnStartGame.setOnClickListener(this);
         btnSingleWord.setOnClickListener(this);
         btnParagraph.setOnClickListener(this);
+        btnHParagraph.setOnClickListener(this);
+        btnHSingleWord.setOnClickListener(this);
     }
     private void startSelection(){
         btnStartGame.setVisibility(View.GONE);
@@ -99,7 +124,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void startParagraph(){
         startActivity(new Intent(this,ParagraphActivity.class));
     }
-    private void startHighScore() {
-        startActivity(new Intent(this,HighScoreActivity.class));
+    private void startHighScoreSelection() {
+        btnStartGame.setVisibility(View.GONE);
+        btnHighScore.setVisibility(View.GONE);
+        btnHParagraph.setVisibility(View.VISIBLE);
+        btnHSingleWord.setVisibility(View.VISIBLE);
+        Animation animation = new AlphaAnimation(0,1);
+        animation.setDuration(1500);
+        btnHParagraph.setAnimation(animation);
+        btnHSingleWord.setAnimation(animation);
     }
 }

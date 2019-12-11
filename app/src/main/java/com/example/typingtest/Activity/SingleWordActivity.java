@@ -1,11 +1,14 @@
 package com.example.typingtest.Activity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
+import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,7 +16,13 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.typingtest.Model.User;
 import com.example.typingtest.R;
+import com.example.typingtest.Utils.Constants;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.shreyaspatil.MaterialDialog.BottomSheetMaterialDialog;
+import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,7 +38,7 @@ public class SingleWordActivity extends AppCompatActivity {
     private EditText edtUserInput;
     private Random random = new Random();
     private String currentWord;
-    private int score = 0;
+    private int score,numberOfLetters = 0;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +66,7 @@ public class SingleWordActivity extends AppCompatActivity {
                 textTimeRemaining.setText(getString(R.string.zero));
                 edtUserInput.setEnabled(false);
                 textCurrentWord.setText("-----");
+                initializeResultDialog();
             }
         }.start();
         currentWord = sequence.get(0);
@@ -76,6 +86,7 @@ public class SingleWordActivity extends AppCompatActivity {
                     currentWord = sequence.get(score);
                     textCurrentWord.setText(currentWord);
                     edtUserInput.setText("");
+                    numberOfLetters += s.length();
                     String result = getString(R.string.score) + " " + score;
                     textCurrentScore.setText(result);
                 }
@@ -94,6 +105,47 @@ public class SingleWordActivity extends AppCompatActivity {
         sequence = new ArrayList<>();
         for (int i = 0;i<100;i++)
             sequence.add(wordList.get(random.nextInt(wordList.size())));
+    }
+    private void initializeResultDialog(){
+        this.setTheme(R.style.MaterialTheme);
+        String speedText = getString(R.string.typing_speed) + " " + numberOfLetters / 5 + " WPM";
+        SpannableString spannableString = new SpannableString(speedText);
+        spannableString.setSpan(Color.RED,0,speedText.length(),0);
+        //todo: spannable color change is disabled
+        final BottomSheetMaterialDialog builder = new BottomSheetMaterialDialog.Builder(this)
+                .setTitle("Time").setCancelable(false)
+                .setMessage(getString(R.string.correct_letter) + " " + numberOfLetters + "\n" +
+                        getString(R.string.correct_word) + "\n" + spannableString)
+                .setPositiveButton("Try Again",R.drawable.try_again,new BottomSheetMaterialDialog.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        dialogInterface.dismiss();
+                        pushFirebaseValues();
+                        edtUserInput.setText("");
+                        recreate();
+                    }
+                })
+                .setNegativeButton("Main Menu",R.drawable.main_menu,new BottomSheetMaterialDialog.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        dialogInterface.dismiss();
+                        pushFirebaseValues();
+                        setTheme(R.style.AppTheme);
+                        finishAffinity();
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    }
+                }).build();
+        builder.show();
+    }
+
+    private void pushFirebaseValues() {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(Constants.USER_SCORE);
+        String id = databaseReference.push().getKey();
+        User user = new User(id,getSharedPreferences(Constants.USER_PREFERENCE,Context.MODE_PRIVATE).getString(Constants.USER_NICK,getString(R.string.OK)),
+                numberOfLetters/5,0,numberOfLetters,true);
+        if (id!=null){
+            databaseReference.child(id).setValue(user);
+        }
     }
 
     private void extractRandomWords() throws IOException {

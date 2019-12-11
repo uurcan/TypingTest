@@ -21,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class HighScoreActivity extends AppCompatActivity {
     private List<User> userData;
@@ -34,6 +35,7 @@ public class HighScoreActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         userData = new ArrayList<>();
+        final String bundle = Objects.requireNonNull(getIntent().getExtras()).getString(Constants.GAME_TYPE);
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(Constants.USER_SCORE);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -42,7 +44,14 @@ public class HighScoreActivity extends AppCompatActivity {
                 if (dataSnapshot.exists()){
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                         User user = snapshot.getValue(User.class);
-                        userData.add(user);
+                        User user2 = snapshot.getValue(User.class);
+                        if (bundle!=null && user != null) {
+                            if (bundle.equals(Constants.SINGLE_WORD) && user.isSingleWord()) {
+                                userData.add(user);
+                            } else if (bundle.equals(Constants.PARAGRAPH) && !user.isSingleWord()) {
+                                userData.add(user2);
+                            }
+                        }
                     }
                     Collections.sort(userData,User.sortByScore);
                     highScoreAdapter = new HighScoreAdapter(getApplicationContext(),userData);

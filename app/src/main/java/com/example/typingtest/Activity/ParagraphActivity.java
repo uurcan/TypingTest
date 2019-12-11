@@ -157,11 +157,15 @@ public class ParagraphActivity extends AppCompatActivity implements TextWatcher 
         wordToSpan.setSpan(new ForegroundColorSpan(Color.rgb(139,34,34)),currentIndex,lookaheadIndex,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         paragraphTextView.setText(wordToSpan);
     }
-    private void pushFirebaseValues(){
+    private void pushFirebaseValues() {
         String id = databaseReference.push().getKey();
-        User user = new User(id,getSharedPreferences(Constants.USER_PREFERENCE, Context.MODE_PRIVATE)
-                .getString(Constants.USER_NICK,getString(R.string.OK)),(numberOfLetters/5),0,numberOfLetters);
-        if (id != null)
+        User user = new User(id, getSharedPreferences(Constants.USER_PREFERENCE, Context.MODE_PRIVATE)
+                .getString(Constants.USER_NICK, getString(R.string.OK)), (numberOfLetters / 5), 0, numberOfLetters, false);
+        if (id != null) {
             databaseReference.child(id).setValue(user);
+            if (user.isSingleWord()){
+                databaseReference.child(id).setValue(user);
+            }
+        }
     }
 }

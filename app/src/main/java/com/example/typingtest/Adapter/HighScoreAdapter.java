@@ -1,7 +1,6 @@
 package com.example.typingtest.Adapter;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +36,10 @@ public class HighScoreAdapter extends RecyclerView.Adapter<HighScoreAdapter.View
         String userNickText = context.getString(R.string.nickname)+ " " + userList.get(position).getUserName();
         String userLetterText = context.getString(R.string.correct_letter_count)+ " " + userList.get(position).getUserLetterCount();
         String userWPMText = context.getString(R.string.typing_speed)+ " " + userList.get(position).getUserScore() + " WPM";
+        boolean isSingleWord = userList.get(position).isSingleWord();
+        if (isSingleWord){
+
+        }
         holder.textViewUserNick.setText(userNickText);
         holder.textViewUserScore.setText(userLetterText);
         holder.textViewUserLetter.setText(userWPMText);
@@ -50,9 +53,9 @@ public class HighScoreAdapter extends RecyclerView.Adapter<HighScoreAdapter.View
             case 2:
                 holder.imgUserScore.setImageResource(R.drawable.bronze_medal);
                 break;
-                default:
-                    holder.imgUserScore.setImageResource(R.drawable.star);
-                    break;
+            default:
+                holder.imgUserScore.setImageResource(R.drawable.star);
+                break;
         }
     }
 
