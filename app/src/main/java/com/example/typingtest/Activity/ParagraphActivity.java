@@ -46,6 +46,7 @@ public class ParagraphActivity extends AppCompatActivity implements TextWatcher 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paragraph);
         initializeComponents();
+        setTitle(getString(R.string.paragraph_title));
         try {
             refreshParagraph();
         } catch (IOException e) {
@@ -160,7 +161,7 @@ public class ParagraphActivity extends AppCompatActivity implements TextWatcher 
     private void pushFirebaseValues() {
         String id = databaseReference.push().getKey();
         User user = new User(id, getSharedPreferences(Constants.USER_PREFERENCE, Context.MODE_PRIVATE)
-                .getString(Constants.USER_NICK, getString(R.string.OK)), (numberOfLetters / 5), 0, numberOfLetters, false);
+                .getString(Constants.USER_NICK, getString(R.string.OK)), (numberOfLetters / 5), numberOfLetters, false);
         if (id != null) {
             databaseReference.child(id).setValue(user);
             if (user.isSingleWord()){

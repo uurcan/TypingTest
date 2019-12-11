@@ -36,10 +36,6 @@ public class HighScoreAdapter extends RecyclerView.Adapter<HighScoreAdapter.View
         String userNickText = context.getString(R.string.nickname)+ " " + userList.get(position).getUserName();
         String userLetterText = context.getString(R.string.correct_letter_count)+ " " + userList.get(position).getUserLetterCount();
         String userWPMText = context.getString(R.string.typing_speed)+ " " + userList.get(position).getUserScore() + " WPM";
-        boolean isSingleWord = userList.get(position).isSingleWord();
-        if (isSingleWord){
-
-        }
         holder.textViewUserNick.setText(userNickText);
         holder.textViewUserScore.setText(userLetterText);
         holder.textViewUserLetter.setText(userWPMText);

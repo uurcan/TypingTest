@@ -43,6 +43,7 @@ public class SingleWordActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_word);
+        setTitle(getString(R.string.single_word_title));
         textCurrentScore = findViewById(R.id.textCurrentCount);
         textTimeRemaining = findViewById(R.id.textRemainingTime);
         textCurrentWord = findViewById(R.id.textRandomWords);
@@ -142,7 +143,7 @@ public class SingleWordActivity extends AppCompatActivity {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(Constants.USER_SCORE);
         String id = databaseReference.push().getKey();
         User user = new User(id,getSharedPreferences(Constants.USER_PREFERENCE,Context.MODE_PRIVATE).getString(Constants.USER_NICK,getString(R.string.OK)),
-                numberOfLetters/5,0,numberOfLetters,true);
+                numberOfLetters/5,numberOfLetters,true);
         if (id!=null){
             databaseReference.child(id).setValue(user);
         }

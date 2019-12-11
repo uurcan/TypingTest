@@ -31,6 +31,7 @@ public class HighScoreActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_high_score);
+        setTitle(getString(R.string.high_score_title));
         recyclerView = findViewById(R.id.recyclerViewHighScore);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

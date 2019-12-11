@@ -6,15 +6,13 @@ public class User {
     private String userId;
     private String userName;
     private int userScore;
-    private int highestScore;
     private int userLetterCount;
     private boolean singleWord;
     public User(){}
-    public User(String userId, String userName, int userScore,int highestScore,int userLetterCount,boolean singleWord) {
+    public User(String userId, String userName, int userScore,int userLetterCount,boolean singleWord) {
         this.userId = userId;
         this.userName = userName;
         this.userScore = userScore;
-        this.highestScore = highestScore;
         this.userLetterCount = userLetterCount;
         this.singleWord = singleWord;
     }
@@ -27,9 +25,6 @@ public class User {
         return userScore;
     }
 
-    public int getHighestScore() {
-        return highestScore;
-    }
     public int getUserLetterCount(){
         return userLetterCount;
     }
