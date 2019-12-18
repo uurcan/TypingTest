@@ -89,7 +89,7 @@ public class ParagraphActivity extends AppCompatActivity implements TextWatcher 
         inputClean = false;
         wordIndex = 0;
         numberOfWords = paragraphInitializer.getWordCount();
-        countDownTimer = new CountDownTimer(60000, 1000) {
+        countDownTimer = new CountDownTimer(Constants.MILLIS_IN_FUTURE, Constants.COUNTDOWN_INTERVAL) {
             @SuppressLint("SetTextI18n")
             @Override
             public void onTick(long millisUntilFinished) {

@@ -54,7 +54,7 @@ public class SingleWordActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         generateSequence();
-        countDownTimer = new CountDownTimer(60000,1000){
+        countDownTimer = new CountDownTimer(Constants.MILLIS_IN_FUTURE,Constants.COUNTDOWN_INTERVAL){
 
             @SuppressLint("SetTextI18n")
             @Override

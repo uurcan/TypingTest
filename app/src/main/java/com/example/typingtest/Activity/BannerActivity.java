@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.typingtest.R;
+import com.example.typingtest.Utils.Constants;
 
 public class BannerActivity extends AppCompatActivity {
     @Override
@@ -16,7 +17,7 @@ public class BannerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_banner);
         if (getSupportActionBar() != null)
             getSupportActionBar().hide();
-        int TIME_OUT = 3000;
+        int TIME_OUT = Constants.BANNER_SCREEN_TIMEOUT;
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

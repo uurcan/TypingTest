@@ -49,9 +49,6 @@ public class HighScoreAdapter extends RecyclerView.Adapter<HighScoreAdapter.View
             case 2:
                 holder.imgUserScore.setImageResource(R.drawable.bronze_medal);
                 break;
-            default:
-                holder.imgUserScore.setImageResource(R.drawable.star);
-                break;
         }
     }
 

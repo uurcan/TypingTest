@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnStartGame.setVisibility(View.VISIBLE);
         btnHighScore.setVisibility(View.VISIBLE);
         Animation animation = new AlphaAnimation(0, 1);
-        animation.setDuration(1500);
+        animation.setDuration(Constants.ANIMATION_DURATION);
         btnHighScore.setAnimation(animation);
         btnStartGame.setAnimation(animation);
         removeToolbar();
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSingleWord.setVisibility(View.VISIBLE);
         btnParagraph.setVisibility(View.VISIBLE);
         Animation animation = new AlphaAnimation(0, 1);
-        animation.setDuration(1500);
+        animation.setDuration(Constants.ANIMATION_DURATION);
         btnSingleWord.setAnimation(animation);
         btnParagraph.setAnimation(animation);
     }
