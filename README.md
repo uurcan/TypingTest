@@ -1,6 +1,6 @@
 # TypingTest
 Typing test application for Android devices..
-The main purpose of the application is write as fastest as you can!
+The main objective of the application is write as fastest as you can!
 Application includes two different options. Single Word mode and Paragraph Mode..
 
 Single Word mode : 
